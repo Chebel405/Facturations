@@ -1,17 +1,18 @@
-package com.Facturation.demo.Repository;
+package com.Facturation.demo.Entity;
 
 
 
 import jakarta.persistence.*;
-import lombok.Data;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 
 
-@Data
-@Entity
+
+//@Entity
 @Table(
         name = "entreprise"
 )
+
 public class Entreprise {
     @Id
     @GeneratedValue(
@@ -21,7 +22,8 @@ public class Entreprise {
             name = "siret",
             nullable = false
     )
-    private Integer siret;
+
+    private Long siret;
     private String siren;
     private String ape;
     private String tva;
@@ -33,18 +35,29 @@ public class Entreprise {
     private String siege;
     private String rcs;
     private String cfe;
-    private String codeActivité;
+    private String codeActivite;
     private String mail;
     private String site;
     private String note;
 
-    /*@OneToMany(mappedBy = "entreprise", fetch = FetchType.EAGER)
+    /* JE RELIE LA TABLE UTILISATEUR A LA TABLE ENTREPRISE */
+
+    /*@ManyToMany
+    @JoinTable(
+            name = "entreprise_utilisateur",
+            joinColumns = @JoinColumn(name = "entreprise_id"),
+            inverseJoinColumns = @JoinColumn(name = "utilisateur_id")
+
+    )
+
     private List<Utilisateur> utilisateurs*/
 
+    //Constructor
     public Entreprise() {
     }
 
-    public Entreprise(Integer siret, String siren, String ape, String tva, String adresse, String codePostal, String commune, String portable, String raisonSocial, String siege, String rcs, String cfe, String codeActivité, String mail, String site, String note) {
+
+    public Entreprise(Long siret, String siren, String ape, String tva, String adresse, String codePostal, String commune, String portable, String raisonSocial, String siege, String rcs, String cfe, String codeActivité, String mail, String site, String note) {
         this.siret = siret;
         this.siren = siren;
         this.ape = ape;
@@ -57,17 +70,19 @@ public class Entreprise {
         this.siege = siege;
         this.rcs = rcs;
         this.cfe = cfe;
-        this.codeActivité = codeActivité;
+        this.codeActivite = codeActivite;
         this.mail = mail;
         this.site = site;
         this.note = note;
+        /**/
     }
 
-    public Integer getSiret() {
+    // Getter et Setter
+    public Long getSiret() {
         return siret;
     }
 
-    public void setSiret(Integer siret) {
+    public void setSiret(Long siret) {
         this.siret = siret;
     }
 
@@ -159,12 +174,12 @@ public class Entreprise {
         this.cfe = cfe;
     }
 
-    public String getCodeActivité() {
-        return codeActivité;
+    public String getCodeActivite() {
+        return codeActivite;
     }
 
-    public void setCodeActivité(String codeActivité) {
-        this.codeActivité = codeActivité;
+    public void setCodeActivite(String codeActivite) {
+        this.codeActivite = codeActivite;
     }
 
     public String getMail() {
