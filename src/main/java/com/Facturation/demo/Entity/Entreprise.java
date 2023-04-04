@@ -1,28 +1,21 @@
 package com.Facturation.demo.Entity;
 
-
-
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Bean;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 
 
 
-//@Entity
-@Table(
-        name = "entreprise"
-)
-
+@Entity
+@Table(name = "entreprise")
+@Data
 public class Entreprise {
-    @Id
-    @GeneratedValue(
-        strategy = GenerationType.AUTO
-    )
-    @Column(
-            name = "siret",
-            nullable = false
-    )
 
+    @jakarta.persistence.Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "siret", nullable = false)
+    @Id
     private Long siret;
     private String siren;
     private String ape;
@@ -57,6 +50,7 @@ public class Entreprise {
     }
 
 
+    @Autowired
     public Entreprise(Long siret, String siren, String ape, String tva, String adresse, String codePostal, String commune, String portable, String raisonSocial, String siege, String rcs, String cfe, String codeActivité, String mail, String site, String note) {
         this.siret = siret;
         this.siren = siren;
@@ -205,4 +199,6 @@ public class Entreprise {
     public void setNote(String note) {
         this.note = note;
     }
+
+
 }

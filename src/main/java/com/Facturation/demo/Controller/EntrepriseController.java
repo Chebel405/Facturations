@@ -14,6 +14,7 @@ public class EntrepriseController {
 
     private final EntrepriseService entrepriseService;
 
+
     public EntrepriseController(EntrepriseService entrepriseService) {
         this.entrepriseService = entrepriseService;
     }
