@@ -1,10 +1,14 @@
 package com.Facturation.demo.Entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
+import java.util.List;
 
 
 @Entity
@@ -35,7 +39,7 @@ public class Entreprise {
 
     /* JE RELIE LA TABLE UTILISATEUR A LA TABLE ENTREPRISE */
 
-    /*@ManyToMany
+    @ManyToMany
     @JoinTable(
             name = "entreprise_utilisateur",
             joinColumns = @JoinColumn(name = "entreprise_id"),
@@ -43,15 +47,15 @@ public class Entreprise {
 
     )
 
-    private List<Utilisateur> utilisateurs*/
+    private List<Utilisateur> utilisateurs;
 
-    //Constructor
+    //Constructor vide
     public Entreprise() {
     }
 
-
+    //Constructor
     @Autowired
-    public Entreprise(Long siret, String siren, String ape, String tva, String adresse, String codePostal, String commune, String portable, String raisonSocial, String siege, String rcs, String cfe, String codeActivité, String mail, String site, String note) {
+    public Entreprise(Long siret, String siren, String ape, String tva, String adresse, String codePostal, String commune, String portable, String raisonSocial, String siege, String rcs, String cfe, String codeActivite, String mail, String site, String note) {
         this.siret = siret;
         this.siren = siren;
         this.ape = ape;
@@ -200,5 +204,11 @@ public class Entreprise {
         this.note = note;
     }
 
+    public List<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
 
+    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
 }
