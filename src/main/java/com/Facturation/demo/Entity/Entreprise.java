@@ -49,6 +49,13 @@ public class Entreprise {
 
     private List<Utilisateur> utilisateurs;
 
+    /*@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "facture_id", nullable = false)
+    private Facture factures;*/
+
+    @OneToMany
+    private List<Facture> factures;
+
     //Constructor vide
     public Entreprise() {
     }

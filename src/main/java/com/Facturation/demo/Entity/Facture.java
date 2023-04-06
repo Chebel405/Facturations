@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "facture")
@@ -53,17 +54,23 @@ public class Facture {
     private String assuranceProTexteDefault;
     private String servicesTexteDefault;
 
-    // ManyToOne...
-    //private List<Entreprise> entreprises;
+    // 1 facture est transmise à 1,n Entreprise
+  /*  @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Entreprise> entreprises;*/
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "siret_id", nullable = false)
+    private Entreprise entreprises;
+
+
 
     //Contructor vide
     public Facture(){}
 
 
     //Constructor
-
     @Autowired
-    public Facture(Long numeroDeFacture, String statut, Date dateDeCreation, Date dateDeModification, Date datePdf, Date dateFinalisation, Date dateEnvoi, Date dateRelance, Date datePaiement, String emetteurNom, String emetteurSociete, String emetteurSiren, String emetteurSiret, String emetteurCodeActivite, String emetteurCodeApe, String emetteurCodeTva, String emetteurAdresse, String emetteurTelephone, String emetteurMail, String destinationNom, String destinationSociete, String destinationSiren, String destinationCodeActivite, String destinationCodeApe, String destinationCodeTva, String destinataireAdresse, String destinataireTelephone, String destinataireMail, String documentLie, String tvaTexteDefault, String conditionDePaiement, String modeDePaiement, String interetDeRetard, String compteBancaire, String ligneDetail, String tva0TexteDefault, String interetDeRetardTexteDefault, String assuranceProTexteDefault, String servicesTexteDefault) {
+    public Facture(Long numeroDeFacture, String statut, Date dateDeCreation, Date dateDeModification, Date datePdf, Date dateFinalisation, Date dateEnvoi, Date dateRelance, Date datePaiement, String emetteurNom, String emetteurSociete, String emetteurSiren, String emetteurSiret, String emetteurCodeActivite, String emetteurCodeApe, String emetteurCodeTva, String emetteurAdresse, String emetteurTelephone, String emetteurMail, String destinationNom, String destinationSociete, String destinationSiren, String destinationCodeActivite, String destinationCodeApe, String destinationCodeTva, String destinataireAdresse, String destinataireTelephone, String destinataireMail, String documentLie, String tvaTexteDefault, String conditionDePaiement, String modeDePaiement, String interetDeRetard, String compteBancaire, String ligneDetail, String tva0TexteDefault, String interetDeRetardTexteDefault, String assuranceProTexteDefault, String servicesTexteDefault, Entreprise entreprises) {
         this.numeroDeFacture = numeroDeFacture;
         this.statut = statut;
         this.dateDeCreation = dateDeCreation;
@@ -103,7 +110,12 @@ public class Facture {
         this.interetDeRetardTexteDefault = interetDeRetardTexteDefault;
         this.assuranceProTexteDefault = assuranceProTexteDefault;
         this.servicesTexteDefault = servicesTexteDefault;
+        this.entreprises = entreprises;
     }
+
+
+
+
 
     //Getter et Setter
 
@@ -137,7 +149,7 @@ public class Facture {
     }
 
     public void setDateDeModification(Date dateDeModification) {
-        dateDeModification = dateDeModification;
+        this.dateDeModification = dateDeModification;
     }
 
     public Date getDatePdf() {
@@ -420,5 +432,11 @@ public class Facture {
         this.servicesTexteDefault = servicesTexteDefault;
     }
 
+    public Entreprise getEntreprises() {
+        return entreprises;
+    }
 
+    public void setEntreprises(Entreprise entreprises) {
+        this.entreprises = entreprises;
+    }
 }
