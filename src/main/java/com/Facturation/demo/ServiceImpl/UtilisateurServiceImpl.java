@@ -5,6 +5,8 @@ import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Repository.UtilisateurRepository;
 import com.Facturation.demo.Service.UtilisateurService;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -47,11 +49,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public Utilisateur updateUtilisateur(Long id, Utilisateur utilisateur) {
+    public Utilisateur updateUtilisateur(@PathVariable Long id, @RequestBody Utilisateur utilisateur) {
         Optional<Utilisateur> optionalUtilisateur = utilisateurRepository.findById(id);
         if (optionalUtilisateur.isPresent()) {
             Utilisateur existeUtilisateur = optionalUtilisateur.get();
-            existeUtilisateur.setId(utilisateur.getId());
             existeUtilisateur.setNom(utilisateur.getNom());
             existeUtilisateur.setPrenom(utilisateur.getPrenom());
             existeUtilisateur.setFonction(utilisateur.getFonction());
@@ -65,10 +66,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             existeUtilisateur.setVille(utilisateur.getVille());
             existeUtilisateur.setNote(utilisateur.getNote());
             return utilisateurRepository.save(existeUtilisateur);
-        } else {
-            // gestion de l'erreur si l'utilisateur n'existe pas
-            throw new NoSuchElementException("Utilisateur avec ID " + id + " n'existe pas");
         }
+        return utilisateur;
     }
 }
 
