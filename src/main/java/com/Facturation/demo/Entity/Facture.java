@@ -57,7 +57,7 @@ public class Facture {
     // 1 facture est transmise à 1,n Entreprise
   /*  @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Entreprise> entreprises;*/
-
+    //Ajout de la clé etrangere siret_id
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "siret_id", nullable = false)
     private Entreprise entreprises;

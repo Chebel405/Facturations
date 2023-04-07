@@ -1,12 +1,10 @@
 package com.Facturation.demo.Entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
@@ -14,7 +12,11 @@ import java.util.List;
 @Table(name = "utilisateur")
 @Data
 public class Utilisateur {
+    @jakarta.persistence.Id
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "utilisateur_seq")
+    @SequenceGenerator(name = "utilisateur_seq", sequenceName = "utilisateur_seq", allocationSize = 1)
+    @Column(name = "id", nullable = false)
     private Long id;
     private String nom;
     private String prenom;

@@ -16,4 +16,6 @@ public interface FactureRepository extends JpaRepository<Facture, Long> {
     Facture save(Facture facture);
 
     void deleteById(Long numeroDeFacture);
+
+
 }

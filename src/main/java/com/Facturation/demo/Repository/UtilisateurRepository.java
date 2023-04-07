@@ -11,12 +11,17 @@ import java.util.Optional;
 @Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
 
-    List<Utilisateur> findAll();
+   /* List<Utilisateur> findAll();
 
     @Override
     Optional<Utilisateur> findById(Long id);
 
     Utilisateur save(Utilisateur utilisateur);
 
-    void deleteById(Long id);
+    void deleteById(Long id);*/
+
+
+
+
 }
+
