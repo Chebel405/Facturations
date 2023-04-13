@@ -2,13 +2,16 @@ package com.Facturation.demo.Controller;
 
 
 import com.Facturation.demo.Entity.Facture;
+import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Service.FactureService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/factures")
+@CrossOrigin
 
 public class FactureController {
 
@@ -18,18 +21,19 @@ public class FactureController {
         this.factureService = factureService;
     }
 
-    @GetMapping("/")
-    public List<Facture> getAllFactures(){
-        return factureService.getAllFactures();
+    @GetMapping("")
+    public List<Facture> findAll(){
+        return factureService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Facture getFactureById(@PathVariable Long id){
-        return factureService.getFactureById(id);
+    public Optional<Facture> findById(@PathVariable Long id){
+        return factureService.findById(id);
     }
 
     @PostMapping("/")
     public Facture createFacture(@RequestBody Facture facture) {
+
         return factureService.createFacture(facture);
     }
 
@@ -38,9 +42,15 @@ public class FactureController {
         return factureService.updateFacture(id, facture);
     }
 
+    @PostMapping("")
+    public Facture save(@RequestBody Facture facture) {
+        return factureService.save(facture);
+    }
+
+
     @DeleteMapping("/{id}")
     public void deleteFacture(@PathVariable Long id){
-        factureService.deleteFacture(id);
+        factureService.deleteById(id);
     }
 
 }

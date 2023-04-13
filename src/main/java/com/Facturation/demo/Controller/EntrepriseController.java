@@ -1,13 +1,16 @@
 package com.Facturation.demo.Controller;
 
 import com.Facturation.demo.Entity.Entreprise;
+import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Service.EntrepriseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/entreprises")
+@CrossOrigin
 
 public class EntrepriseController {
 
@@ -19,15 +22,14 @@ public class EntrepriseController {
         this.entrepriseService = entrepriseService;
     }
 
-    @GetMapping("/")
-    public List<Entreprise> getAllEntreprises(){
-
-        return entrepriseService.getAllEntreprises();
+    @GetMapping("")
+    public List<Entreprise> findAll(){
+        return entrepriseService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Entreprise getEntrepriseBySiret(@PathVariable Long id){
-        return entrepriseService.getEntrepriseBySiret(id);
+    public Optional<Entreprise> findById(@PathVariable Long id){
+        return entrepriseService.findById(id);
     }
 
     @PostMapping("/")
@@ -40,10 +42,13 @@ public class EntrepriseController {
         return entrepriseService.updateEntreprise(id, entreprise);
     }
 
-
+    @PostMapping("")
+    public Entreprise save(@RequestBody Entreprise entreprise) {
+        return entrepriseService.save(entreprise);
+    }
     @DeleteMapping("/{id}")
     public void deleteEntreprise(@PathVariable Long id) {
-        entrepriseService.deleteEntreprise(id);
+        entrepriseService.deleteById(id);
     }
 
 

@@ -12,13 +12,5 @@ import java.util.Optional;
 
 public interface EntrepriseRepository extends JpaRepository<Entreprise, Long> {
 
-    List<Entreprise> findAll();
-
-    Optional<Entreprise> findBySiret(Long siret);
-
-    Entreprise save(Entreprise entreprise);
-
-    void deleteBySiret(Long siret);
-
 
 }

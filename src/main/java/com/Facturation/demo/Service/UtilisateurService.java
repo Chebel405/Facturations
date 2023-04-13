@@ -2,10 +2,11 @@ package com.Facturation.demo.Service;
 
 
 import com.Facturation.demo.Entity.Utilisateur;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public interface UtilisateurService {
     Utilisateur createUtilisateur(Utilisateur utilisateur);
 

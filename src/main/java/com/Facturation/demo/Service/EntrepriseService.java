@@ -2,58 +2,27 @@ package com.Facturation.demo.Service;
 
 
 import com.Facturation.demo.Entity.Entreprise;
+import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Repository.EntrepriseRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class EntrepriseService {
+public interface EntrepriseService {
 
+    Entreprise createEntreprise(Entreprise entreprise);
 
-    private final EntrepriseRepository entrepriseRepository;
+    List<Entreprise> findAll();
 
-    public EntrepriseService(EntrepriseRepository entrepriseRepository){
-        this.entrepriseRepository = entrepriseRepository;
-    }
+    Optional<Entreprise> findById(Long siret);
 
-    public List<Entreprise> getAllEntreprises(){
-        return entrepriseRepository.findAll();
-    }
+    Entreprise save(Entreprise entreprise);
 
-    public Entreprise getEntrepriseBySiret(Long siret){
-        return entrepriseRepository.findBySiret(siret).orElse(null);
-    }
+    void deleteById(Long siret);
 
-    public Entreprise createEntreprise(Entreprise entreprise){
-        return entrepriseRepository.save(entreprise);
-    }
-
-    public Entreprise updateEntreprise(Long siret, Entreprise entreprise){
-        Entreprise existeEntreprise = getEntrepriseBySiret(siret);
-            existeEntreprise.setSiret(entreprise.getSiret());
-            existeEntreprise.setSiren(entreprise.getSiren());
-            existeEntreprise.setApe(entreprise.getApe());
-            existeEntreprise.setTva(entreprise.getTva());
-            existeEntreprise.setAdresse(entreprise.getAdresse());
-            existeEntreprise.setCodePostal(entreprise.getCodePostal());
-            existeEntreprise.setCommune(entreprise.getCommune());
-            existeEntreprise.setPortable(entreprise.getPortable());
-            existeEntreprise.setRaisonSocial(entreprise.getRaisonSocial());
-            existeEntreprise.setSiege(entreprise.getSiege());
-            existeEntreprise.setRcs(entreprise.getRcs());
-            existeEntreprise.setCfe(entreprise.getCfe());
-            existeEntreprise.setCodeActivite(entreprise.getCodeActivite());
-            existeEntreprise.setMail(entreprise.getMail());
-            existeEntreprise.setSite(entreprise.getSite());
-            existeEntreprise.setNote(entreprise.getNote());
-            return entrepriseRepository.save(existeEntreprise);
-    }
-    public void deleteEntreprise(Long siret){
-        entrepriseRepository.deleteBySiret(siret);
-    }
-
-
+    Entreprise updateEntreprise(Long siret, Entreprise entreprise);
 
 }
