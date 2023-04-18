@@ -3,6 +3,8 @@ package com.Facturation.demo.Controller;
 
 import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Service.UtilisateurService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +14,9 @@ import java.util.Optional;
 @RequestMapping("/utilisateurs")
 @CrossOrigin
 
-public class UtilisateurController {
 
+public class UtilisateurController {
+    @Autowired
     private final UtilisateurService utilisateurService;
 
     public UtilisateurController(UtilisateurService utilisateurService){

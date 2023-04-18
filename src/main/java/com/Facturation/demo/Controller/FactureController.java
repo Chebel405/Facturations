@@ -4,6 +4,7 @@ package com.Facturation.demo.Controller;
 import com.Facturation.demo.Entity.Facture;
 import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Service.FactureService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Optional;
 @CrossOrigin
 
 public class FactureController {
-
+    @Autowired
     private final FactureService factureService;
 
     public FactureController(FactureService factureService) {

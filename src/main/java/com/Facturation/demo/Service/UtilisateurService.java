@@ -2,11 +2,15 @@ package com.Facturation.demo.Service;
 
 
 import com.Facturation.demo.Entity.Utilisateur;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-@Service
+
+//@Service
+@ComponentScan
 public interface UtilisateurService {
     Utilisateur createUtilisateur(Utilisateur utilisateur);
 

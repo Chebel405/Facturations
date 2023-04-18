@@ -4,18 +4,20 @@ import com.Facturation.demo.Entity.Facture;
 import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Repository.FactureRepository;
 import com.Facturation.demo.Service.FactureService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class FactureServiceImpl implements FactureService {
 
     private final FactureRepository factureRepository;
-
+    @Autowired
     public FactureServiceImpl(FactureRepository factureRepository) {
         this.factureRepository = factureRepository;
     }

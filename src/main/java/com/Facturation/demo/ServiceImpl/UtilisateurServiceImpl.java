@@ -4,7 +4,9 @@ package com.Facturation.demo.ServiceImpl;
 import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Repository.UtilisateurRepository;
 import com.Facturation.demo.Service.UtilisateurService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
@@ -12,12 +14,12 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
+@Service
 public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final UtilisateurRepository utilisateurRepository;
 
-
+    @Autowired
     public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
         this.utilisateurRepository = utilisateurRepository;
     }
@@ -26,7 +28,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public Utilisateur createUtilisateur(Utilisateur utilisateur) {
         return utilisateurRepository.save(utilisateur);
     }
-
 
     @Override
     public List<Utilisateur> findAll() {

@@ -3,6 +3,9 @@ package com.Facturation.demo.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 
@@ -11,6 +14,9 @@ import java.util.List;
 @Entity
 @Table(name = "utilisateur")
 @Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Utilisateur {
     @jakarta.persistence.Id
     @Id
@@ -31,7 +37,10 @@ public class Utilisateur {
     private String ville;
     private String note;
 
+
+
    @ManyToMany(mappedBy = "utilisateurs")
     private List<Entreprise> entreprises;
+
 
 }

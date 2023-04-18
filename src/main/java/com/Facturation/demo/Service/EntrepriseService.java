@@ -5,12 +5,14 @@ import com.Facturation.demo.Entity.Entreprise;
 import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Repository.EntrepriseRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
+//@ComponentScan
 public interface EntrepriseService {
 
     Entreprise createEntreprise(Entreprise entreprise);

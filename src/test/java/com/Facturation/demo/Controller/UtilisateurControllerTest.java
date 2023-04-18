@@ -1,77 +1,80 @@
-/*package com.Facturation.demo.Controller;
-import com.Facturation.demo.Entity.Utilisateur;
-import com.Facturation.demo.Repository.UtilisateurRepository;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Before;
+package com.Facturation.demo.Controller;
+import com.Facturation.demo.Configuration.UtilisateurConfiguration;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 
-
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = UtilisateurConfiguration.class)
+@WebMvcTest(UtilisateurController.class)
 public class UtilisateurControllerTest {
 
-    private UtilisateurRepository utilisateurRepository;
-    private Utilisateur utilisateur;
+    @Autowired
+    private MockMvc mockMvc;
 
-    @Before("")
-    public void setUp() {
-        // Initialisation de la base de données
-        utilisateurRepository = new utilisateurRepository();
-        utilisateur = new Utilisateur("John", "Doe",);
-    }
+    @Test
+    public void testGetAllUtilisateur() throws Exception {
+        mockMvc.perform(get("/utilisateurs"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].nom", is("Chebel")))
+                .andExpect(jsonPath("$[0].prenom", is("Anne")))
+                .andExpect(jsonPath("$[1].nom", is("Camus")))
+                .andExpect(jsonPath("$[1].prenom", is("Albert")));
 
-    @After
-    public void tearDown() {
-        // Suppression de la base de données
-        utilisateurRepository.deleteAll();
     }
 
     @Test
-    public void testCreate() {
-        // Création d'une nouvelle personne
-        personDao.create(person);
-
-        // Vérification que l'objet a été correctement enregistré
-        Person personFromDb = personDao.findById(person.getId());
-        assertNotNull(personFromDb);
-        assertEquals(person, personFromDb);
+    public void testGetUtilisateurById() throws Exception {
+        mockMvc.perform(get("/utilisateurs/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.nom", is("Chebel")))
+                .andExpect(jsonPath("$.prenom", is("Anne")));
     }
 
     @Test
-    public void testUpdate() {
-        // Mise à jour d'une personne existante
-        personDao.create(person);
-        person.setFirstName("Jane");
-        personDao.update(person);
-
-        // Vérification que l'objet a été correctement mis à jour
-        Person personFromDb = personDao.findById(person.getId());
-        assertNotNull(personFromDb);
-        assertEquals(person, personFromDb);
+    public void testCreateUtilisateur() throws Exception{
+        String requestBody = "{\"nom\":\"Camus\",\"prenom\":\"Albert\"}";
+        mockMvc.perform(post("/utilisateurs")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists());
     }
 
     @Test
-    public void testDelete() {
-        // Suppression d'une personne existante
-        personDao.create(person);
-        personDao.delete(person.getId());
+    public void testUpdateUtilisateur() throws Exception {
+        String requestBody = "{\"nom\":\"Chebel\",\"prenom\":\"Albert\"}";
 
-        // Vérification que l'objet a été correctement supprimé
-        assertNull(personDao.findById(person.getId()));
+        mockMvc.perform(put("/utilisateurs/2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(2)))
+                .andExpect(jsonPath("$.nom", is("Chebel")))
+                .andExpect(jsonPath("$.prenom", is("Albert")));
     }
 
     @Test
-    public void testFindAll() {
-        // Récupération de toutes les personnes
-        personDao.create(person);
-        Person person2 = new Person("Jane", "Doe");
-        personDao.create(person2);
-        List<Person> people = personDao.findAll();
-
-        // Vérification que la liste contient les deux personnes
-        assertNotNull(people);
-        assertEquals(2, people.size());
-        assertTrue(people.contains(person));
-        assertTrue(people.contains(person2));
+    public void testDeleteUtilisateur() throws Exception {
+        mockMvc.perform(delete("/utilisateurs/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].nom", is("Camus")))
+                .andExpect(jsonPath("$[0].prenom", is("Albert")));
     }
 
-}*/
+}

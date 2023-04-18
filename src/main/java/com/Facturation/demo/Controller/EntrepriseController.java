@@ -3,6 +3,8 @@ package com.Facturation.demo.Controller;
 import com.Facturation.demo.Entity.Entreprise;
 import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Service.EntrepriseService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

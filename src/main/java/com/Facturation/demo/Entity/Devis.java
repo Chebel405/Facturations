@@ -1,25 +1,23 @@
 package com.Facturation.demo.Entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import jakarta.persistence.JoinColumn;
-
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
-
 @Entity
-@Table(name = "facture")
+@Table(name = "devis")
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
-public class Facture {
+public class Devis {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "numero_de_facture", nullable = false)
-    private Long numeroDeFacture;
+    @Column(name = "numero_de_devis", nullable = false)
+    private Long numeroDeDevis;
 
     @Column(name = "statut")
     private String statut;
@@ -42,8 +40,8 @@ public class Facture {
     @Column(name = "date_relance")
     private Date dateRelance;
 
-    @Column(name = "date_paiement")
-    private Date datePaiement;
+    @Column(name = "date_signature")
+    private Date dateSignature;
 
     @Column(name = "emetteur_nom")
     private String emetteurNom;
@@ -75,23 +73,26 @@ public class Facture {
     @Column(name = "emetteur_mail")
     private String emetteurMail;
 
-    @Column(name = "destination_nom")
-    private String destinationNom;
+    @Column(name = "destinataire_nom")
+    private String destinataireNom;
 
-    @Column(name = "destination_societe")
-    private String destinationSociete;
+    @Column(name = "destinataire_societe")
+    private String destinataireSociete;
 
-    @Column(name = "destination_siren")
-    private String destinationSiren;
+    @Column(name = "destinataire_siren")
+    private String destinataireSiren;
 
-    @Column(name = "destination_code_activite")
-    private String destinationCodeActivite;
+    @Column(name = "destinataire_siret")
+    private String destinataireSiret;
 
-    @Column(name = "destination_code_ape")
-    private String destinationCodeApe;
+    @Column(name = "destinataire_code_activite")
+    private String destinataireCodeActivite;
 
-    @Column(name = "destination_code_tva")
-    private String destinationCodeTva;
+    @Column(name = "destinataire_code_ape")
+    private String destinataireCodeApe;
+
+    @Column(name = "destinataire_code_tva")
+    private String destinataireCodeTva;
 
     @Column(name = "destinataire_adresse")
     private String destinataireAdresse;
@@ -101,9 +102,6 @@ public class Facture {
 
     @Column(name = "destinataire_mail")
     private String destinataireMail;
-
-    @Column(name = "document_lie")
-    private String documentLie;
 
     @Column(name = "tva_texte_default")
     private String tvaTexteDefault;
@@ -117,9 +115,6 @@ public class Facture {
     @Column(name = "interet_de_retard")
     private String interetDeRetard;
 
-    @Column(name = "compte_bancaire")
-    private String compteBancaire;
-
     @Column(name = "ligne_detail")
     private String ligneDetail;
 
@@ -131,21 +126,15 @@ public class Facture {
 
     @Column(name = "assurance_pro_texte_default")
     private String assuranceProTexteDefault;
+
     @Column(name = "service_texte_default")
     private String servicesTexteDefault;
 
-    // 1 facture est transmise à 1,n Entreprise
-  /*  @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Entreprise> entreprises;*/
 
-    //Ajout de la clé etrangere siret_id
-    /*@OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "siret_id", nullable = false)
-    private Entreprise entreprises;*/
 
-   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name="siret_id")
-   private Entreprise entreprises;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="siret_id")
+    private Entreprise entreprises;
 
 
     //Contructor vide
@@ -161,7 +150,5 @@ public class Facture {
 
 
     //Getter et Setter
-
-
 
 }
