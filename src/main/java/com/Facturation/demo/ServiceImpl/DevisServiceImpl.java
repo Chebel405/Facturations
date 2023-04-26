@@ -17,6 +17,7 @@ import java.util.Optional;
 @Service
 public class DevisServiceImpl implements DevisService {
 
+    // L'objet créé ne peut pas être modifier
     private final DevisRepository devisRepository;
 
     @Autowired

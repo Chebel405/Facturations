@@ -134,7 +134,7 @@ public class Devis {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="siret_id")
-    private Entreprise entreprises;
+    private Entreprise entreprise;
 
 
     //Contructor vide

@@ -2,9 +2,6 @@ package com.Facturation.demo.Service;
 
 
 import com.Facturation.demo.Entity.Entreprise;
-import com.Facturation.demo.Entity.Utilisateur;
-import com.Facturation.demo.Repository.EntrepriseRepository;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 //@Service
-//@ComponentScan
+@ComponentScan
+
 public interface EntrepriseService {
 
     Entreprise createEntreprise(Entreprise entreprise);
@@ -26,5 +24,10 @@ public interface EntrepriseService {
     void deleteById(Long siret);
 
     Entreprise updateEntreprise(Long siret, Entreprise entreprise);
+
+    Optional<Entreprise> findByIdWithFactures(Long siret);
+
+
+
 
 }

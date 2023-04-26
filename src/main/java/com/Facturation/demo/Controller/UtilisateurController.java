@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/utilisateurs")
 @CrossOrigin
 
 
 public class UtilisateurController {
+    //Injecte une instance de la classe UtilisationService
+    //Final = permet de garantir 'limmuabilité et améliorer la sécurité
     @Autowired
     private final UtilisateurService utilisateurService;
 

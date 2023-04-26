@@ -2,12 +2,10 @@ package com.Facturation.demo.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.persistence.JoinColumn;
 
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "facture")
@@ -134,16 +132,8 @@ public class Facture {
     @Column(name = "service_texte_default")
     private String servicesTexteDefault;
 
-    // 1 facture est transmise à 1,n Entreprise
-  /*  @OneToMany(mappedBy = "facture", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Entreprise> entreprises;*/
 
-    //Ajout de la clé etrangere siret_id
-    /*@OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "siret_id", nullable = false)
-    private Entreprise entreprises;*/
-
-   @ManyToOne(fetch = FetchType.LAZY)
+   @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name="siret_id")
    private Entreprise entreprises;
 

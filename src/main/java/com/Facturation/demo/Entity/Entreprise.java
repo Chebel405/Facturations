@@ -1,19 +1,23 @@
 package com.Facturation.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -55,10 +59,16 @@ public class Entreprise {
             inverseJoinColumns = @JoinColumn(name = "utilisateur_id")
 
     )
-
+    @Fetch(FetchMode.JOIN)
+    @JsonIgnore
+    //@JsonManagedReference
     private List<Utilisateur> utilisateurs;
 
-    @OneToMany
-    private List<Facture> factures;
+    //@OneToMany
+    //private List<Facture> factures;
+
+    @OneToMany(mappedBy = "entreprises", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+   // private List<Facture> factures = new ArrayList<>();
+    private Set<Facture> factures;
 
 }

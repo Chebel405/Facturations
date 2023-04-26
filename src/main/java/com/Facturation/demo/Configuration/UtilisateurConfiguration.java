@@ -13,7 +13,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @ComponentScan
 public class UtilisateurConfiguration {
-
+    // @Bean est utilisée pour indiquer que la méthode retourne un objet
+    //Doit être géré et configuré par le conteneur Spring
     @Bean
     public UtilisateurService utilisateurService(UtilisateurRepository utilisateurRepository) {
         return new UtilisateurServiceImpl(utilisateurRepository);

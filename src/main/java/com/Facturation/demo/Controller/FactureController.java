@@ -1,9 +1,11 @@
 package com.Facturation.demo.Controller;
 
 
+import com.Facturation.demo.Entity.Entreprise;
 import com.Facturation.demo.Entity.Facture;
 import com.Facturation.demo.Entity.Utilisateur;
 import com.Facturation.demo.Service.FactureService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +41,7 @@ public class FactureController {
     }
 
     @PutMapping("/{id}")
-    public Facture updateEntreprise(@PathVariable Long id, @RequestBody Facture facture){
+    public Facture updateClient(@PathVariable Long id, @RequestBody Facture facture){
         return factureService.updateFacture(id, facture);
     }
 
@@ -53,5 +55,7 @@ public class FactureController {
     public void deleteFacture(@PathVariable Long id){
         factureService.deleteById(id);
     }
+
+
 
 }

@@ -1,10 +1,11 @@
 package com.Facturation.demo.Controller;
 
 import com.Facturation.demo.Entity.Entreprise;
-import com.Facturation.demo.Entity.Utilisateur;
+import org.hibernate.Hibernate;
 import com.Facturation.demo.Service.EntrepriseService;
-import lombok.AllArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Optional;
 
 public class EntrepriseController {
 
-
+    @Autowired
     private final EntrepriseService entrepriseService;
 
 
@@ -29,10 +30,46 @@ public class EntrepriseController {
         return entrepriseService.findAll();
     }
 
-    @GetMapping("/{id}")
+  /*  @GetMapping("/{id}")
     public Optional<Entreprise> findById(@PathVariable Long id){
-        return entrepriseService.findById(id);
+        Optional<Entreprise> entreprise = entrepriseService.findById(id);
+        if (entreprise.isPresent()) {
+            Hibernate.initialize(entreprise.get().getFactures());
+        }
+        return entreprise;
+        //return entrepriseService.findById(id);
+    }*/
+ /* @GetMapping("/{id}")
+  public Optional<Entreprise> findById(@PathVariable Long id){
+      Optional<Entreprise> entreprise = entrepriseService.findById(id);
+      if (entreprise.isPresent()) {
+          Hibernate.initialize(entreprise.get().getFactures());
+      }
+      return entreprise;
+  }*/
+
+  /*  @GetMapping("/{id}")
+    public Optional<Entreprise> findById(@PathVariable Long id){
+        Optional<Entreprise> entreprise = entrepriseService.findById(id);
+        entreprise.ifPresent(e -> Hibernate.initialize(e.getFactures()));
+        return entreprise;
+    }*/
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Entreprise> findById(@PathVariable Long id){
+        Optional<Entreprise> entreprise = entrepriseService.findById(id);
+        if (entreprise.isPresent()) {
+            Hibernate.initialize(entreprise.get().getFactures());
+            return ResponseEntity.ok().body(entreprise.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
+
+
+
+
 
     @PostMapping("/")
     public Entreprise createEntreprise(@RequestBody Entreprise entreprise){
