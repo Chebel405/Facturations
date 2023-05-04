@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/devis")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class DevisController {
 
     @Autowired

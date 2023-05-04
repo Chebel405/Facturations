@@ -13,13 +13,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/entreprises")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 
 public class EntrepriseController {
 
     @Autowired
     private final EntrepriseService entrepriseService;
-
 
     public EntrepriseController(EntrepriseService entrepriseService) {
         this.entrepriseService = entrepriseService;
@@ -29,31 +28,6 @@ public class EntrepriseController {
     public List<Entreprise> findAll(){
         return entrepriseService.findAll();
     }
-
-  /*  @GetMapping("/{id}")
-    public Optional<Entreprise> findById(@PathVariable Long id){
-        Optional<Entreprise> entreprise = entrepriseService.findById(id);
-        if (entreprise.isPresent()) {
-            Hibernate.initialize(entreprise.get().getFactures());
-        }
-        return entreprise;
-        //return entrepriseService.findById(id);
-    }*/
- /* @GetMapping("/{id}")
-  public Optional<Entreprise> findById(@PathVariable Long id){
-      Optional<Entreprise> entreprise = entrepriseService.findById(id);
-      if (entreprise.isPresent()) {
-          Hibernate.initialize(entreprise.get().getFactures());
-      }
-      return entreprise;
-  }*/
-
-  /*  @GetMapping("/{id}")
-    public Optional<Entreprise> findById(@PathVariable Long id){
-        Optional<Entreprise> entreprise = entrepriseService.findById(id);
-        entreprise.ifPresent(e -> Hibernate.initialize(e.getFactures()));
-        return entreprise;
-    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<Entreprise> findById(@PathVariable Long id){
@@ -65,11 +39,6 @@ public class EntrepriseController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
-
-
-
 
     @PostMapping("/")
     public Entreprise createEntreprise(@RequestBody Entreprise entreprise){

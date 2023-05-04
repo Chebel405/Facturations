@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/factures")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 
 public class FactureController {
     @Autowired

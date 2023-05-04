@@ -64,11 +64,8 @@ public class Entreprise {
     //@JsonManagedReference
     private List<Utilisateur> utilisateurs;
 
-    //@OneToMany
-    //private List<Facture> factures;
 
     @OneToMany(mappedBy = "entreprises", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-   // private List<Facture> factures = new ArrayList<>();
     private Set<Facture> factures;
 
 }

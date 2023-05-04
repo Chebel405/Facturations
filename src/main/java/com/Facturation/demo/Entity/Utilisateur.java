@@ -52,9 +52,9 @@ public class Utilisateur {
 
 
    @ManyToMany(mappedBy = "utilisateurs")
-  // @JsonIgnore
-   @JsonBackReference
-    private List<Entreprise> entreprises;
+   @JsonIgnore
+  @JsonBackReference
+   private List<Entreprise> entreprises;
 
 
 }
